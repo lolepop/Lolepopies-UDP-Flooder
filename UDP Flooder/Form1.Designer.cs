@@ -48,13 +48,14 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.disappearWhenStartedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.minimiseToTaskbarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.enableByteCounterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.label8 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
-            this.enableByteCounterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.textBox3 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
@@ -116,8 +117,8 @@
             // 
             // trackBar1
             // 
-            this.trackBar1.Location = new System.Drawing.Point(95, 156);
-            this.trackBar1.Maximum = 255;
+            this.trackBar1.Location = new System.Drawing.Point(73, 154);
+            this.trackBar1.Maximum = 65000;
             this.trackBar1.Minimum = 1;
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Size = new System.Drawing.Size(362, 69);
@@ -128,11 +129,11 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(464, 156);
+            this.label4.Location = new System.Drawing.Point(491, 188);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(54, 20);
+            this.label4.Size = new System.Drawing.Size(41, 20);
             this.label4.TabIndex = 7;
-            this.label4.Text = "1 Byte";
+            this.label4.Text = "Byte";
             // 
             // checkBox1
             // 
@@ -263,18 +264,27 @@
             this.disappearWhenStartedToolStripMenuItem.ToolTipText = "Overides \"Minimise to toolbar\" when started\r\nYou will have to close it manually w" +
     "ith task manager";
             // 
-            // notifyIcon1
-            // 
-            this.notifyIcon1.ContextMenuStrip = this.contextMenuStrip1;
-            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
-            this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
-            // 
             // minimiseToTaskbarToolStripMenuItem
             // 
             this.minimiseToTaskbarToolStripMenuItem.CheckOnClick = true;
             this.minimiseToTaskbarToolStripMenuItem.Name = "minimiseToTaskbarToolStripMenuItem";
             this.minimiseToTaskbarToolStripMenuItem.Size = new System.Drawing.Size(376, 30);
             this.minimiseToTaskbarToolStripMenuItem.Text = "Minimise to taskbar";
+            // 
+            // enableByteCounterToolStripMenuItem
+            // 
+            this.enableByteCounterToolStripMenuItem.CheckOnClick = true;
+            this.enableByteCounterToolStripMenuItem.Name = "enableByteCounterToolStripMenuItem";
+            this.enableByteCounterToolStripMenuItem.Size = new System.Drawing.Size(376, 30);
+            this.enableByteCounterToolStripMenuItem.Text = "Enable byte counter";
+            this.enableByteCounterToolStripMenuItem.ToolTipText = "Disabled by default due to lag\r\nWill crash if settings are too high";
+            this.enableByteCounterToolStripMenuItem.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.ContextMenuStrip = this.contextMenuStrip1;
+            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
+            this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
             // 
             // contextMenuStrip1
             // 
@@ -288,7 +298,7 @@
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(198, 22);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(72, 22);
             // 
             // label8
             // 
@@ -311,14 +321,17 @@
             this.button2.Visible = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // enableByteCounterToolStripMenuItem
+            // textBox3
             // 
-            this.enableByteCounterToolStripMenuItem.CheckOnClick = true;
-            this.enableByteCounterToolStripMenuItem.Name = "enableByteCounterToolStripMenuItem";
-            this.enableByteCounterToolStripMenuItem.Size = new System.Drawing.Size(376, 30);
-            this.enableByteCounterToolStripMenuItem.Text = "Enable byte counter";
-            this.enableByteCounterToolStripMenuItem.ToolTipText = "Disabled by default due to lag\r\nWill crash if settings are too high";
-            this.enableByteCounterToolStripMenuItem.Click += new System.EventHandler(this.button2_Click);
+            this.textBox3.Location = new System.Drawing.Point(436, 156);
+            this.textBox3.MaxLength = 5000000;
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(100, 26);
+            this.textBox3.TabIndex = 19;
+            this.textBox3.Text = "1";
+            this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox3.WordWrap = false;
+            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // Form1
             // 
@@ -326,6 +339,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(554, 378);
             this.ContextMenuStrip = this.contextMenuStrip1;
+            this.Controls.Add(this.textBox3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.numericUpDown3);
@@ -390,6 +404,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.ToolStripMenuItem enableByteCounterToolStripMenuItem;
+        private System.Windows.Forms.TextBox textBox3;
     }
 }
 
