@@ -22,7 +22,7 @@ namespace UDP_Flooder
         {
             if (checkBox1.Checked)
             {
-                return new Random().Next(1,255); //Random bytes from 1 to 255 because random does not work in a closed loop
+                return new Random().Next(1, 65000); //Random bytes from 1 to 255 because random does not work in a closed loop
             }
             else
             {
@@ -86,12 +86,13 @@ namespace UDP_Flooder
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            label4.Text = trackBar1.Value != 1 ? String.Concat(trackBar1.Value, " Bytes") : String.Concat(trackBar1.Value, " Byte"); //Ever seen "1 bytes"?
+            label4.Text = trackBar1.Value != 1 ? "Bytes":"Byte"; //Ever seen "1 bytes"?
+            textBox3.Text = trackBar1.Value.ToString();
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            trackBar1.Enabled = !checkBox1.Checked;
+            trackBar1.Enabled = textBox3.Enabled = !checkBox1.Checked;
         }
 
         private void Form1_Resize(object sender, EventArgs e)
@@ -131,6 +132,39 @@ namespace UDP_Flooder
             {
                 label8.Visible = false;
                 button2.Visible = false;
+            }
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e) //Warning this function looks extremely stupid
+        {
+            textBox3.Text = textBox3.Text.Replace(" ", string.Empty);
+            try
+            {
+                Int64 boxVal = Convert.ToInt64(textBox3.Text); //In case user types some really large number for some reason
+                if (boxVal <= 0)
+                {
+                    trackBar1.Value = 1;
+                    textBox3.Text = "1";
+                }
+                else if (boxVal >= 65000)
+                {
+                    trackBar1.Value = 65000;
+                    textBox3.Text = "65000";
+                }
+                else
+                {
+                    trackBar1.Value = Convert.ToInt32(textBox3.Text);
+                }
+                label4.Text = Convert.ToInt32(textBox3.Text) != 1 ? "Bytes" : "Byte";
+            }
+            catch
+            {
+                if (textBox3.Text != "") //I warned you
+                {
+                    trackBar1.Value = 1; //Very flawed stuff here but at least it eliminates the errors
+                    textBox3.Text = "1";
+                    label4.Text = "Byte";
+                }
             }
         }
     }
