@@ -1,5 +1,5 @@
 ## Lolepopie's UDP Flooder
-Simple UDP stress tester with simple controls.
+Simple UDP stress tester with simple controls. [![Github All Releases](https://img.shields.io/github/downloads/lolepop/Lolepopies-UDP-Flooder/total.svg)](https://github.com/lolepop/Lolepopies-UDP-Flooder/releases)
 
 ![Preview](preview.png)
 
