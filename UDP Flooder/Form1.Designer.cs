@@ -56,6 +56,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
+            this.enableMulticoreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
@@ -250,7 +251,8 @@
             this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.disappearWhenStartedToolStripMenuItem,
             this.minimiseToTaskbarToolStripMenuItem,
-            this.enableByteCounterToolStripMenuItem});
+            this.enableByteCounterToolStripMenuItem,
+            this.enableMulticoreToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(88, 29);
             this.settingsToolStripMenuItem.Text = "Settings";
@@ -333,6 +335,14 @@
             this.textBox3.WordWrap = false;
             this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
+            // enableMulticoreToolStripMenuItem
+            // 
+            this.enableMulticoreToolStripMenuItem.CheckOnClick = true;
+            this.enableMulticoreToolStripMenuItem.Name = "enableMulticoreToolStripMenuItem";
+            this.enableMulticoreToolStripMenuItem.Size = new System.Drawing.Size(376, 30);
+            this.enableMulticoreToolStripMenuItem.Text = "Enable multi-core flood";
+            this.enableMulticoreToolStripMenuItem.ToolTipText = "Will take up lots of cpu usage but might be better.";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -395,7 +405,6 @@
         private System.Windows.Forms.NumericUpDown numericUpDown3;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem disappearWhenStartedToolStripMenuItem;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.ToolStripMenuItem minimiseToTaskbarToolStripMenuItem;
@@ -405,6 +414,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.ToolStripMenuItem enableByteCounterToolStripMenuItem;
         private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.ToolStripMenuItem enableMulticoreToolStripMenuItem;
     }
 }
 
