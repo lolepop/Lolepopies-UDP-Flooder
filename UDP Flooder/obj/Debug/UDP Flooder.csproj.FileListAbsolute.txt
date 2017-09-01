@@ -7,4 +7,3 @@ C:\Users\marcu\Desktop\hax\osu\UDP Flooder\UDP Flooder\obj\Debug\UDP_Flooder.Pro
 C:\Users\marcu\Desktop\hax\osu\UDP Flooder\UDP Flooder\obj\Debug\UDP Flooder.csproj.GenerateResource.Cache
 C:\Users\marcu\Desktop\hax\osu\UDP Flooder\UDP Flooder\obj\Debug\UDP Flooder.exe
 C:\Users\marcu\Desktop\hax\osu\UDP Flooder\UDP Flooder\obj\Debug\UDP Flooder.pdb
-C:\Users\marcu\Documents\Visual Studio 2017\Projects\UDP Flooder\UDP Flooder\bin\Debug\UDP Flooder.exe

